@@ -1,7 +1,5 @@
 <?php
 
-
-
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
@@ -9,10 +7,15 @@ include_once('../core/initialize.php');
 
 $post = new Post($db);
 
-$result = $post->read();
+$id = $_GET['id'] ?? null;
 
-if($result->rowCount() > 0){
+$result = $post->read($id);
+
+$crow = $result->rowCount();
+
+if($crow > 0){
     $post_arr = [];
+    $post_arr['count'] = $crow;
     $post_arr['data'] = [];
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)){

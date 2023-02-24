@@ -8,3 +8,4 @@ defined('CORE_PATH') ?: define('CORE_PATH', SITE_ROOT.DS.'core');
 require_once(INC_PATH.DS.'config.php');
 
 require_once(CORE_PATH.DS.'Post.php');
+require_once(CORE_PATH.DS.'Category.php');

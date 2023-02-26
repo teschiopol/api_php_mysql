@@ -33,4 +33,64 @@ class Post{
 
         return $stmt;
     }
+
+    public function create(): bool {
+        $query = "INSERT INTO " . $this->table . " SET title = :title, category_id = :category_id, body = :body, author = :author";
+        $stmt = $this->conn->prepare($query);
+
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $stmt->bindParam(':title', $this->title);
+        $this->body = htmlspecialchars(strip_tags($this->body));
+        $stmt->bindParam(':body', $this->body);
+        $this->author = htmlspecialchars(strip_tags($this->author));
+        $stmt->bindParam(':author', $this->author);
+        $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $stmt->bindParam(':category_id', $this->category_id);
+
+        if($stmt->execute()){
+            return true;
+        }
+
+        printf("Error %s", $stmt->error);
+        return false;
+    }
+
+    public function update(): bool {
+        $query = "UPDATE " . $this->table . " SET title = :title, category_id = :category_id, body = :body, author = :author 
+        WHERE id = :id ";
+        $stmt = $this->conn->prepare($query);
+
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $stmt->bindParam(':title', $this->title);
+        $this->body = htmlspecialchars(strip_tags($this->body));
+        $stmt->bindParam(':body', $this->body);
+        $this->author = htmlspecialchars(strip_tags($this->author));
+        $stmt->bindParam(':author', $this->author);
+        $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $stmt->bindParam(':category_id', $this->category_id);
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(':id', $this->id);
+
+        if($stmt->execute()){
+            return true;
+        }
+
+        printf("Error %s", $stmt->error);
+        return false;
+    }
+
+    public function delete(){
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(':id', $this->id);
+
+        if($stmt->execute()){
+            return true;
+        }
+
+        printf("Error %s", $stmt->error);
+        return false;
+    }
 }

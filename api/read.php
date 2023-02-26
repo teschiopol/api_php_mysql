@@ -2,6 +2,7 @@
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: GET');
 
 include_once('../core/initialize.php');
 
@@ -32,8 +33,8 @@ if($crow > 0){
         $post_arr['data'][] = $post_item;
     }
 
-    echo json_encode($post_arr);
+    echo json_return($post_arr, 'response');
     return;
 }
 
-echo json_encode(array('message' => 'No posts found.'));
+echo json_return('No posts found.');

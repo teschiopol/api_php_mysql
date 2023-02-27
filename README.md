@@ -1,5 +1,7 @@
 # PHP Api - MySQL 💢
 
+[![CodeFactor](https://www.codefactor.io/repository/github/teschiopol/api_php_mysql/badge)](https://www.codefactor.io/repository/github/teschiopol/api_php_mysql)
+
 ## Classes 🧮
 
 - Category

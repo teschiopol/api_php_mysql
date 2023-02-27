@@ -1,0 +1,4 @@
+- [ ] Uniform all methods
+- [ ] Uniform all classes
+- [ ] Catch all exceptions
+- [ ] Define schemas

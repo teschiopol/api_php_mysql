@@ -4,9 +4,9 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: GET');
 
-include_once('../core/initialize.php');
+include_once('core/initialize.php');
 
-$post = new Post($db);
+$post = getClass($_REQUEST['class'],$db);
 
 $id = $_GET['id'] ?? null;
 
@@ -21,15 +21,12 @@ if($crow > 0){
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
         extract($row, EXTR_OVERWRITE);
-        $post_item = array(
-          'id' => $id,
-          'title' => $title,
-          'body' => html_entity_decode($body),
-          'author' => $author,
-          'category_id' => $category_id,
-          'category_name' => $category_name,
-          'created_at' => $created_at
-        );
+        $fields = $post->getFields();
+        $post_item = array();
+        foreach ($fields as $field){
+            $post_item[$field] = $$field;
+        }
+
         $post_arr['data'][] = $post_item;
     }
 
@@ -37,4 +34,4 @@ if($crow > 0){
     return;
 }
 
-echo json_return('No posts found.');
+echo json_return('No '.$_REQUEST['class'].' found.');

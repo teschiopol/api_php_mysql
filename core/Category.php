@@ -4,9 +4,9 @@ class Category{
     private $conn;
     private $table = 'categories';
 
-    public $id;
+    public int $id;
 
-    public $name;
+    public string $name;
 
     public $created_at;
 

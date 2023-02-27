@@ -4,16 +4,28 @@ class Post{
     private $conn;
     private $table = 'posts';
 
-    public $id;
-    public $category_id;
-    public $category_name;
-    public $title;
-    public $body;
-    public $author;
+    public int $id;
+    public int $category_id;
+    public string $category_name;
+    public string  $title;
+    public string $body;
+    public string $author;
     public $created_at;
 
     public function __construct($db){
         $this->conn = $db;
+    }
+
+    public function getFields(): array {
+        return array(
+            'id',
+            'title',
+            'body',
+            'author',
+            'category_id',
+            'category_name',
+            'created_at'
+        );
     }
 
     public function read($id = null){
